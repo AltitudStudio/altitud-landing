@@ -15,6 +15,7 @@ export default function CommentsSection() {
     const [comments, setComments] = useState<Comment[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showAllComments, setShowAllComments] = useState(false);
 
     const [newName, setNewName] = useState('');
     const [newText, setNewText] = useState('');
@@ -157,39 +158,90 @@ export default function CommentsSection() {
             </div>
 
             {/* Lista de Comentarios */}
-            <div className="comments-list">
-                {loading && <p style={{ textAlign: 'center' }}>Actualizando comunidad...</p>}
+            <div className="comments-list" style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', 
+                gap: '24px', 
+                position: 'relative' 
+            }}>
+                {loading && <p style={{ textAlign: 'center', gridColumn: '1 / -1' }}>Actualizando comunidad...</p>}
 
-                {comments.map((comment) => (
-                    <BorderGlow
-                        key={comment.id}
-                        edgeSensitivity={20}
-                        glowColor="270 50 60"
-                        backgroundColor="var(--glass-bg)"
-                        borderRadius={16}
-                        glowRadius={15}
-                        glowIntensity={0.5}
-                        coneSpread={15}
-                        colors={['#724896', '#46C0E9', '#161121']}
-                        className="glass-panel"
-                    >
-                        <div className="comment-card" style={{ margin: 0, padding: '25px' }}>
-                            <div className="comment-header">
-                                <div className="avatar-initial">
-                                    {comment.name.charAt(0)}
-                                </div>
-                                <div className="comment-author-info">
-                                    <h4>{comment.name}</h4>
-                                    <div className="stars">
-                                        {'★'.repeat(comment.rating)}{'☆'.repeat(5 - comment.rating)}
+                {(showAllComments ? comments : comments.slice(0, 4)).map((comment, index) => {
+                    const isFaded = !showAllComments && index === 3;
+                    return (
+                        <div key={comment.id} style={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
+                            <div style={{
+                                flex: 1,
+                                opacity: isFaded ? 0.3 : 1,
+                                filter: isFaded ? 'blur(3px)' : 'none',
+                                pointerEvents: isFaded ? 'none' : 'auto',
+                                transition: 'all 0.4s ease',
+                                height: '100%'
+                            }}>
+                                <BorderGlow
+                                    edgeSensitivity={20}
+                                    glowColor="270 50 60"
+                                    backgroundColor="var(--glass-bg)"
+                                    borderRadius={16}
+                                    glowRadius={15}
+                                    glowIntensity={0.5}
+                                    coneSpread={15}
+                                    colors={['#724896', '#46C0E9', '#161121']}
+                                    className="glass-panel"
+                                >
+                                    <div className="comment-card" style={{ margin: 0, padding: '25px', height: '100%' }}>
+                                        <div className="comment-header">
+                                            <div className="avatar-initial">
+                                                {comment.name.charAt(0)}
+                                            </div>
+                                            <div className="comment-author-info">
+                                                <h4>{comment.name}</h4>
+                                                <div className="stars">
+                                                    {'★'.repeat(comment.rating)}{'☆'.repeat(5 - comment.rating)}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="comment-text" style={{ marginTop: '15px' }}>"{comment.text}"</p>
                                     </div>
-                                </div>
+                                </BorderGlow>
                             </div>
-                            <p className="comment-text" style={{ marginTop: '15px' }}>"{comment.text}"</p>
+                            
+                            {isFaded && (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    zIndex: 10,
+                                    width: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}>
+                                    <button 
+                                        className="btn-primary" 
+                                        onClick={() => setShowAllComments(true)}
+                                        style={{ padding: '12px 24px', whiteSpace: 'nowrap', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}
+                                    >
+                                        Ver todos los testimonios
+                                    </button>
+                                </div>
+                            )}
                         </div>
-                    </BorderGlow>
-                ))}
+                    );
+                })}
             </div>
+
+            {showAllComments && comments.length > 4 && (
+                <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                    <button 
+                        className="btn-primary" 
+                        onClick={() => setShowAllComments(false)}
+                        style={{ padding: '10px 20px', background: 'transparent', border: '1px solid var(--acento-cian)' }}
+                    >
+                        Mostrar menos
+                    </button>
+                </div>
+            )}
         </section>
     );
 }

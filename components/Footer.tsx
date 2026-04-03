@@ -28,13 +28,13 @@ export default function Footer() {
                         Elevando la perspectiva visual de tus proyectos con tecnología dron de última generación.
                     </p>
                     <div style={{ display: 'flex', gap: '15px' }}>
-                        <a href="#" style={{ color: 'var(--texto-secundario)', transition: 'color 0.3s' }}>
+                        <a href="altitud-landing.vercel.app" style={{ color: 'var(--texto-secundario)', transition: 'color 0.3s' }}>
                             <span className="material-symbols-outlined">language</span>
                         </a>
-                        <a href="#" style={{ color: 'var(--texto-secundario)', transition: 'color 0.3s' }}>
+                        <a href="https://www.instagram.com/studioaltitud?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" style={{ color: 'var(--texto-secundario)', transition: 'color 0.3s' }}>
                             <span className="material-symbols-outlined">photo_camera</span>
                         </a>
-                        <a href="#" style={{ color: 'var(--texto-secundario)', transition: 'color 0.3s' }}>
+                        <a href="mailto:studioaltitud@gmail.com" style={{ color: 'var(--texto-secundario)', transition: 'color 0.3s' }}>
                             <span className="material-symbols-outlined">mail</span>
                         </a>
                     </div>
@@ -60,7 +60,7 @@ export default function Footer() {
                         </li>
                         <li style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--texto-secundario)' }}>
                             <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>call</span>
-                            +54 9 351 000-0000
+                            +54 9 351 613-9217
                         </li>
                     </ul>
                 </div>

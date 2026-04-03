@@ -7,7 +7,6 @@ interface PortfolioCarouselProps {
 }
 
 export default function PortfolioCarousel({ images: defaultImages }: PortfolioCarouselProps) {
-  //const [images, setImages] = useState<string[]>(defaultImages);
   const [images, setImages] = useState<string[]>([
     '/images/portfolio1.png',
     '/images/portfolio2.png',
@@ -61,17 +60,16 @@ export default function PortfolioCarousel({ images: defaultImages }: PortfolioCa
   }, [direction, images.length, TOTAL_ITEM_WIDTH]);
 
   // Fetch Logic
-  // PortfolioCarousel.tsx (Fragmento del cambio)
   useEffect(() => {
     const fetchImages = async () => {
-      const endpoint = process.env.NEXT_PUBLIC_DRIVE_ENDPOINT;
-      if (!endpoint) return;
-
       try {
         setLoading(true);
-        const res = await fetch(endpoint);
+        const res = await fetch('/api/drive');
+        if (!res.ok) throw new Error('Error en el endpoint de la API local');
+
         const data = await res.json();
-        if (Array.isArray(data)) {
+        if (Array.isArray(data) && data.length > 0) {
+          // Extraemos los URLs si el response tiene estructura JSON array de strings
           setImages(data);
         }
       } catch (error) {
@@ -83,6 +81,7 @@ export default function PortfolioCarousel({ images: defaultImages }: PortfolioCa
 
     fetchImages();
   }, []);
+
 
   // RequestAnimationFrame Loop
   const animate = useCallback(() => {
