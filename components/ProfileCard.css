@@ -1,0 +1,165 @@
+/* ProfileCard.css - Estilos base creados para acompañar ProfileCard.tsx */
+.pc-card-wrapper {
+  position: relative;
+  display: inline-block;
+  perspective: 1000px;
+  width: 100%;
+  max-width: 350px;
+}
+
+.pc-behind {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  background: var(--behind-glow-color, rgba(125, 190, 255, 0.67));
+  filter: blur(25px);
+  opacity: 0.8;
+  z-index: 0;
+  border-radius: 20px;
+  transform: scale(var(--behind-glow-size, 1));
+}
+
+.pc-card-shell {
+  position: relative;
+  border-radius: 20px;
+  z-index: 1;
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+  background: var(--glass-bg, rgba(20, 20, 20, 0.6));
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.active.pc-card-shell {
+  transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+}
+
+.pc-inside {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  background: var(--inner-gradient);
+  min-height: 400px;
+  justify-content: center;
+}
+
+.pc-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.pc-glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.3) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+.pc-avatar-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  gap: 20px;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+}
+
+.pc-user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pc-mini-avatar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.pc-user-text {
+  text-align: left;
+}
+
+.pc-handle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pc-status {
+  font-size: 0.8rem;
+  color: var(--acento-cian, #46C0E9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pc-contact-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  background: var(--acento-cian, #46C0E9);
+  color: #000;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.pc-contact-btn:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(70, 192, 233, 0.4);
+}
+
+.pc-details h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0 0 5px 0;
+  text-align: center;
+}
+
+.pc-details p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin: 0;
+}

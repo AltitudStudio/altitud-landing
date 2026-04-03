@@ -1,0 +1,347 @@
+:root {
+  --fondo-oscuro: #161121;
+  /* Manteniendo tu base */
+  --superficie-clara: #2a2438;
+  --primario-violeta: #724896;
+  --acento-cian: #46C0E9;
+  --texto-blanco: #f4f4f4;
+  --texto-secundario: #a39eb5;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: var(--acento-cian);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--fondo-oscuro);
+  color: var(--texto-blanco);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+/* =========================================
+   UTILIDADES GLASSMORPHISM & TARJETAS
+========================================= */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--primario-violeta);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(114, 72, 150, 0.15);
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--texto-blanco);
+  color: var(--fondo-oscuro);
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--acento-cian);
+  color: var(--fondo-oscuro);
+  box-shadow: 0 0 15px rgba(70, 192, 233, 0.4);
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.navbar--scrolled {
+  background: rgba(22, 17, 33, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 15px 5%;
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--texto-blanco);
+  text-decoration: none;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.navbar__link {
+  color: var(--texto-secundario);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: var(--texto-blanco);
+}
+
+/* Ocultar elementos en móvil */
+@media (max-width: 768px) {
+
+  .navbar__links,
+  .navbar__cta {
+    display: none;
+  }
+}
+
+/* =========================================
+   SERVICIOS
+========================================= */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 40px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  background: rgba(114, 72, 150, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  color: var(--primario-violeta);
+  border: 1px solid rgba(114, 72, 150, 0.2);
+}
+
+.service-icon-wrapper .material-symbols-outlined {
+  font-size: 32px;
+}
+
+/* Form elements base styles */
+.input-base {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 15px;
+  color: white;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.input-base:focus {
+  border-color: var(--acento-cian);
+}
+
+/* The scrolling animation is now driven by JS requestAnimationFrame for accurate syncing */
+.carousel-track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  padding-left: 30px;
+  /* Optional, balances the gap */
+  /* We use inline styles for JS driven transform */
+}
+
+.carousel-card {
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.carousel-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(70, 192, 233, 0.2);
+  z-index: 10;
+}
+
+/* About & Contact Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(70, 192, 233, 0.4);
+    border-left-width: 0px;
+  }
+
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px 5px rgba(70, 192, 233, 0.2);
+    border-left-width: 4px;
+    border-color: var(--acento-cian);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(70, 192, 233, 0);
+    border-left-width: 0px;
+  }
+}
+
+.pulse-hover {
+  border-left: 0px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.pulse-hover:hover {
+  animation: pulse 1s infinite;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* AGRUPA AMBAS CLASES AQUÍ PARA EL MISMO EFECTO */
+.about-me-panel,
+.contact-panel {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-me-panel:hover,
+.contact-panel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(70, 192, 233, 0.15);
+}
+
+/* =========================================
+   1. ESTILOS DE MARCA Y SELECCIÓN
+========================================= */
+/* Cambia el color al sombrear texto al violeta de Altitud Studio */
+::selection {
+  background-color: var(--primario-violeta);
+  /* #724896 */
+  color: var(--texto-blanco);
+}
+
+::-moz-selection {
+  background-color: var(--primario-violeta);
+  color: var(--texto-blanco);
+}
+
+/* =========================================
+   2. LAYOUT: SERVICIOS (3 COLUMNAS)
+========================================= */
+.services-grid {
+  display: grid;
+  /* Crea 3 columnas exactas en pantallas grandes, y se adapta a 1 en móviles */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   3. ESTILOS DE COMPONENTES BÁSICOS
+========================================= */
+.header-container,
+.footer-container {
+  background: rgba(22, 17, 33, 0.8);
+  /* Fondo oscuro semitransparente */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 20px;
+}
+
+.footer-container {
+  border-bottom: none;
+  border-top: 1px solid var(--glass-border);
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* =========================================
+   4. SECCIÓN DE COMENTARIOS / TESTIMONIOS
+========================================= */
+.comments-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.comment-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar-initial {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primario-violeta);
+  /* Círculo violeta */
+  color: var(--texto-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(114, 72, 150, 0.3);
+}
+
+.comment-author-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.stars {
+  color: #FFD700;
+  /* Color dorado para las estrellas */
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+}
+
+.comment-text {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
